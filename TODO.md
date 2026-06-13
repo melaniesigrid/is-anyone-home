@@ -6,6 +6,8 @@ Rough priority order. Items within a group can be done in any order.
 
 ## Immediate fixes
 
+- [x] Replace the top text for this A field guide to machine consciousness and to the possibility that subjective experience may not belong to biology alone.
+
 - [ ] **Persistent threshold** — save the filter setting to `localStorage` so it survives a reload
 - [ ] **Scroll restoration** — on reload, return to last scroll position (or honour the URL hash)
 - [ ] **Mobile nav** — the sticky side-nav is hidden on small screens with no replacement; add a compact section-jump drawer or bottom tab bar
