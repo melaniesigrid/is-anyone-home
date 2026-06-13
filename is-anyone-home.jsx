@@ -1377,28 +1377,79 @@ export default function App() {
           <article className="ah-body">
             <GameCtx.Provider value={gameCtxVal}>
             <ThresholdCtx.Provider value={threshold}>
-              {/* Calibrate invite — shown only when game is off */}
-              {!gameOn && (
-                <div className="ah-calibrate-invite">
+              {/* Calibrate invite — always visible, two states */}
+              <div className={`ah-calibrate-invite${gameOn ? " is-active" : ""}`}>
+                {gameOn ? (
                   <div className="ah-calibrate-invite-inner">
-                    <p className="ah-calibrate-invite-label">test your intuition</p>
-                    <p className="ah-calibrate-invite-desc">
-                      Enter calibration mode and read each claim without its certainty tag.
-                      Pick the level you think it deserves — then see how your instincts
-                      compare to mine.
+                    <p className="ah-calibrate-invite-label">
+                      <span className="ah-calibrate-pulse" aria-hidden="true" />
+                      calibration mode
                     </p>
-                    <button
-                      type="button"
-                      className="ah-game-start"
-                      onClick={startGame}
-                      title="Guess each claim's certainty level — press 1–4 to pick quickly"
-                    >
-                      <span className="ah-game-start-icon">⊙</span> calibrate yourself
-                      {bestPct !== null && <span className="ah-game-best">best: {bestPct}%</span>}
+                    <p className="ah-calibrate-invite-desc">
+                      Certainty tags are hidden. Press <kbd className="ah-kbd">1</kbd>–<kbd className="ah-kbd">4</kbd> or click
+                      a level on each claim to score it. Scroll down and start.
+                    </p>
+                    {score.t > 0 && (
+                      <div className="ah-calibrate-live-score">
+                        <span className="ah-calibrate-live-val">
+                          {score.c}<span className="ah-calibrate-live-sep">/</span>{score.t}
+                        </span>
+                        <span className="ah-calibrate-live-pct">
+                          {Math.round((score.c / score.t) * 100)}%
+                        </span>
+                        {streak >= 2 && (
+                          <span className="ah-calibrate-live-streak">×{streak} streak</span>
+                        )}
+                      </div>
+                    )}
+                    <button type="button" className="ah-game-end ah-calibrate-stop" onClick={stopGame}>
+                      end session · see results
                     </button>
                   </div>
-                </div>
-              )}
+                ) : (
+                  <div className="ah-calibrate-invite-inner">
+                    <p className="ah-calibrate-invite-label">two ways to read this</p>
+                    <div className="ah-calibrate-modes">
+                      <div className="ah-calibrate-mode">
+                        <span className="ah-calibrate-mode-icon" aria-hidden="true">○</span>
+                        <div>
+                          <p className="ah-calibrate-mode-name">Explore</p>
+                          <p className="ah-calibrate-mode-desc">
+                            You're in it now. Every claim is tagged by how certain I am.
+                            Drag the threshold at the top — the uncertain ones dim and disappear.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="ah-calibrate-mode">
+                        <span className="ah-calibrate-mode-icon ah-calibrate-mode-icon--game" aria-hidden="true">⊙</span>
+                        <div>
+                          <p className="ah-calibrate-mode-name">Calibrate</p>
+                          <p className="ah-calibrate-mode-desc">
+                            Tags hidden. You judge each claim: <em>Established</em>, <em>Contested</em>,{" "}
+                            <em>Speculative</em>, or <em>Unknowable</em>. Then compare with mine.
+                            How well calibrated is your uncertainty?
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="ah-calibrate-cta">
+                      <button
+                        type="button"
+                        className="ah-game-start"
+                        onClick={startGame}
+                        title="Guess each claim's certainty level — press 1–4 to pick quickly"
+                      >
+                        <span className="ah-game-start-icon">⊙</span> enter calibration mode
+                      </button>
+                      {bestPct !== null ? (
+                        <span className="ah-calibrate-record">record: {bestPct}% — beat it</span>
+                      ) : (
+                        <span className="ah-calibrate-record ah-calibrate-record--new">no record yet</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
               {/* I — DEFINITIONS */}
               <section id="definitions" className="ah-section">
                 <p className="ah-sec-eyebrow">I · definitions</p>
@@ -2713,14 +2764,19 @@ main { position: relative; z-index: 1; }
 .ah-calibrate-invite {
   margin: 0 0 40px;
   padding: 20px 24px;
-  border: 1px solid rgba(157,140,242,0.25);
+  border: 1px solid rgba(157,140,242,0.22);
   border-radius: 12px;
-  background: rgba(157,140,242,0.05);
+  background: rgba(157,140,242,0.04);
+  transition: border-color 300ms ease, background 300ms ease;
+}
+.ah-calibrate-invite.is-active {
+  border-color: rgba(157,140,242,0.42);
+  background: rgba(157,140,242,0.09);
 }
 .ah-calibrate-invite-inner {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 .ah-calibrate-invite-label {
   font-family: var(--ah-mono);
@@ -2729,14 +2785,119 @@ main { position: relative; z-index: 1; }
   text-transform: uppercase;
   color: var(--ah-speculative);
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 .ah-calibrate-invite-desc {
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 1.6;
   color: var(--ah-dim);
   margin: 0;
-  max-width: 480px;
+  max-width: 520px;
 }
+.ah-calibrate-pulse {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ah-speculative);
+  flex: none;
+  animation: ah-pulse 1.6s ease-in-out infinite;
+}
+@keyframes ah-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+.ah-kbd {
+  font-family: var(--ah-mono);
+  font-size: 11px;
+  padding: 1px 5px;
+  border: 1px solid var(--ah-line);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+  color: var(--ah-dim);
+}
+/* two-mode layout */
+.ah-calibrate-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ah-calibrate-mode {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.ah-calibrate-mode-icon {
+  font-size: 15px;
+  color: var(--ah-faint);
+  width: 20px;
+  flex: none;
+  padding-top: 2px;
+  line-height: 1;
+}
+.ah-calibrate-mode-icon--game { color: var(--ah-speculative); }
+.ah-calibrate-mode-name {
+  font-family: var(--ah-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ah-dim);
+  margin: 0 0 3px;
+}
+.ah-calibrate-mode-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ah-faint);
+  margin: 0;
+}
+.ah-calibrate-mode-desc em { font-style: italic; color: var(--ah-dim); }
+/* CTA row */
+.ah-calibrate-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.ah-calibrate-record {
+  font-family: var(--ah-mono);
+  font-size: 11px;
+  color: var(--ah-speculative);
+  opacity: 0.75;
+}
+.ah-calibrate-record--new { color: var(--ah-faint); }
+/* active state — live score inline */
+.ah-calibrate-live-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ah-mono);
+  background: rgba(157,140,242,0.10);
+  border: 1px solid rgba(157,140,242,0.28);
+  border-radius: 999px;
+  padding: 5px 14px;
+  align-self: flex-start;
+}
+.ah-calibrate-live-val {
+  color: var(--ah-text);
+  font-size: 15px;
+  font-weight: 500;
+}
+.ah-calibrate-live-sep { color: var(--ah-faint); margin: 0 1px; }
+.ah-calibrate-live-pct {
+  font-size: 11px;
+  color: var(--ah-speculative);
+  padding: 1px 6px;
+  background: rgba(157,140,242,0.15);
+  border-radius: 999px;
+}
+.ah-calibrate-live-streak {
+  font-size: 11px;
+  color: var(--ah-warm);
+}
+.ah-calibrate-stop { align-self: flex-start; }
 
 /* ── game toggle ──────────────────────────────────────────── */
 .ah-game-start {
