@@ -1206,6 +1206,7 @@ export default function App() {
 
   useEffect(() => {
     try { localStorage.setItem("ah-light", lightMode ? "1" : "0"); } catch {}
+    document.documentElement.style.colorScheme = lightMode ? "light" : "dark";
   }, [lightMode]);
 
   useEffect(() => {
