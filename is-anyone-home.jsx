@@ -2591,11 +2591,12 @@ main { position: relative; z-index: 1; }
 }
 .ah-basilisk-cap {
   font-family: var(--ah-mono);
-  font-size: 11px;
-  color: var(--ah-faint);
+  font-size: 12px;
+  color: var(--ah-dim);
   letter-spacing: 0.04em;
   text-align: center;
 }
+.ah-basilisk-cap .ah-link { color: var(--ah-text); text-underline-offset: 2px; }
 
 @media (max-width: 860px) {
   .ah-layout { grid-template-columns: 1fr; gap: 0; }
