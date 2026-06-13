@@ -2118,7 +2118,7 @@ const CSS = `
   background: none;
   border: 1px solid var(--ah-line);
   border-radius: 999px;
-  width: 34px; height: 34px;
+  width: 40px; height: 40px;
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer;
   color: var(--ah-faint);
@@ -2701,8 +2701,8 @@ main { position: relative; z-index: 1; }
   background: transparent;
   border: 1px solid var(--ah-speculative);
   border-radius: 999px;
-  padding: 6px 14px;
-  min-height: 34px;
+  padding: 8px 16px;
+  min-height: 40px;
   cursor: pointer;
   white-space: nowrap;
   display: inline-flex;
