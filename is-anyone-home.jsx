@@ -1310,7 +1310,7 @@ export default function App() {
           Is anyone home?
         </a>
         <div className="ah-topbar-right">
-          {gameOn ? (
+          {gameOn && (
             <div className="ah-score-row">
               <span className="ah-score-label">calibration</span>
               <span className="ah-score-val">{score.c}<span className="ah-score-sep">/</span>{score.t}</span>
@@ -1323,11 +1323,6 @@ export default function App() {
               <span className="ah-score-keys" aria-hidden="true">1–4</span>
               <button type="button" className="ah-game-end" onClick={stopGame}>results</button>
             </div>
-          ) : (
-            <button type="button" className="ah-game-start" onClick={startGame} title="Guess each claim's certainty level — press 1–4 to pick quickly">
-              <span className="ah-game-start-icon">⊙</span> calibrate yourself
-              {bestPct !== null && <span className="ah-game-best">best: {bestPct}%</span>}
-            </button>
           )}
           <button
             type="button"
@@ -1382,6 +1377,28 @@ export default function App() {
           <article className="ah-body">
             <GameCtx.Provider value={gameCtxVal}>
             <ThresholdCtx.Provider value={threshold}>
+              {/* Calibrate invite — shown only when game is off */}
+              {!gameOn && (
+                <div className="ah-calibrate-invite">
+                  <div className="ah-calibrate-invite-inner">
+                    <p className="ah-calibrate-invite-label">test your intuition</p>
+                    <p className="ah-calibrate-invite-desc">
+                      Enter calibration mode and read each claim without its certainty tag.
+                      Pick the level you think it deserves — then see how your instincts
+                      compare to mine.
+                    </p>
+                    <button
+                      type="button"
+                      className="ah-game-start"
+                      onClick={startGame}
+                      title="Guess each claim's certainty level — press 1–4 to pick quickly"
+                    >
+                      <span className="ah-game-start-icon">⊙</span> calibrate yourself
+                      {bestPct !== null && <span className="ah-game-best">best: {bestPct}%</span>}
+                    </button>
+                  </div>
+                </div>
+              )}
               {/* I — DEFINITIONS */}
               <section id="definitions" className="ah-section">
                 <p className="ah-sec-eyebrow">I · definitions</p>
@@ -2691,6 +2708,35 @@ main { position: relative; z-index: 1; }
 
 /* ── topbar layout ─────────────────────────────────────────── */
 .ah-topbar-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+/* ── calibrate invite block ───────────────────────────────── */
+.ah-calibrate-invite {
+  margin: 0 0 40px;
+  padding: 20px 24px;
+  border: 1px solid rgba(157,140,242,0.25);
+  border-radius: 12px;
+  background: rgba(157,140,242,0.05);
+}
+.ah-calibrate-invite-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ah-calibrate-invite-label {
+  font-family: var(--ah-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ah-speculative);
+  margin: 0;
+}
+.ah-calibrate-invite-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ah-dim);
+  margin: 0;
+  max-width: 480px;
+}
 
 /* ── game toggle ──────────────────────────────────────────── */
 .ah-game-start {
