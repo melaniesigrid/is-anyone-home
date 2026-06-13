@@ -2571,8 +2571,8 @@ main { position: relative; z-index: 1; }
   padding-top: 8px;
   border-top: 1px solid var(--ah-line-soft);
 }
-.ah-sign .ah-link { color: var(--ah-dim); text-decoration: underline; text-underline-offset: 2px; }
-.ah-sign .ah-link:hover { color: var(--ah-text); }
+.ah-sign .ah-link { color: var(--ah-text); text-decoration: underline; text-underline-offset: 2px; opacity: 0.75; }
+.ah-sign .ah-link:hover { opacity: 1; }
 
 /* ── basilisk image ───────────────────────────────────────── */
 .ah-basilisk-image {
