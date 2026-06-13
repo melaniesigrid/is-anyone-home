@@ -3373,8 +3373,8 @@ main { position: relative; z-index: 1; }
 /* ── origin / author section ─────────────────────────────── */
 .ah-section--origin {
   border-top: 1px solid var(--ah-line);
-  padding-top: 40px;
-  margin-top: 10px;
+  padding-top: 48px;
+  margin-top: 32px;
 }
 .ah-origin-eyebrow { color: var(--ah-cool) !important; }
 .ah-origin-byline {
