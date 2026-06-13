@@ -3120,9 +3120,13 @@ main { position: relative; z-index: 1; }
   font-family: var(--ah-mono); font-size: 10px; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--ah-cool);
   background: none; border: 1px solid rgba(121,194,194,0.25);
-  border-radius: 4px; padding: 3px 8px; cursor: pointer;
+  border-radius: 4px; padding: 6px 12px; cursor: pointer;
   transition: background 140ms, border-color 140ms, color 140ms;
-  flex: none;
+  flex: none; min-height: 32px;
+  position: relative;
+}
+.ah-explore-btn::after {
+  content: ''; position: absolute; inset: -6px -4px;
 }
 .ah-explore-btn:hover {
   background: rgba(121,194,194,0.08); border-color: rgba(121,194,194,0.6); color: #a5dede;
