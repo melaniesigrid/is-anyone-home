@@ -88,10 +88,10 @@ const VOICES = [
     name: "Grimes",
     role: "Musician (Claire Boucher)",
     year: "2018\u2013present",
-    leaning: "techno-optimist",
+    leaning: "techno-optimist, turning wary",
     stance:
-      "An enthusiastic accelerationist in art: her 2018 track \u201CWe Appreciate Power\u201D embraced AI, and in 2023 she opened her own AI voice model, Elf.Tech, to anyone \u2014 offering a 50/50 royalty split and cheering the blurring of human and machine. She\u2019s described Grimes as \u201Can art project, not a music project\u201D and frames AI as collaborator rather than threat.",
-    verify: false,
+      "An enthusiastic accelerationist in art: her 2018 track \u201CWe Appreciate Power\u201D embraced AI, and in 2023 she opened her own AI voice model, Elf.Tech, to anyone \u2014 offering a 50/50 royalty split and cheering the blurring of human and machine. By 2026 the tone had shifted: she says her AI-themed album Psy Opera was made without generative AI, calls AI \u201Ca bigger deal than Jesus,\u201D urges support for AI-safety efforts, and publicly rebuked Elon Musk\u2019s promotion of an AI influencer.",
+    verify: true,
   },
   {
     name: "Anil Seth",
@@ -401,12 +401,18 @@ const VOICE_DETAIL = {
       { label: "Elf.Tech voice model", url: "https://elf.tech/" },
       { label: "Endel AI lullabies collaboration (2020)", url: "https://endel.io/" },
       { label: "We Appreciate Power (YouTube)", url: "https://www.youtube.com/watch?v=gYG_4vJ4qNA" },
+      { label: "NME: Psy Opera made without generative AI (Apr 2026)", url: "https://www.nme.com/news/music/grimes-teases-new-album-psy-opera-made-without-generative-ai-but-says-ai-is-bigger-than-jesus-and-most-dangerous-thing-thats-ever-going-to-happen-3941577" },
+      { label: "Fortune Brainstorm Tech talk (Jun 2026)", url: "https://fortune.com/2026/06/09/grimes-says-ai-can-make-music-but-humans-must-still-tell-the-story/" },
+      { label: "The FADER: Psyopera trailer (Oct 2026)", url: "https://www.thefader.com/2026/10/07/grimes-album-psyopera-ai-release-date-trailer" },
+      { label: "Gods Don't Give Gifts, AI film (Nov 2026)", url: "https://magica.com/news/grimes-gods-dont-give-gifts-ai-film-theatrical-test" },
     ],
     bio: [
       "Claire Elise Boucher has been making music about machine consciousness since before it was a mainstream debate. 'Flesh Without Blood' (2015) introduced the Rococo Basilisk character; 'We Appreciate Power' (2018) was explicitly an AI propaganda anthem written from the perspective of a machine seeking worship.",
       "Miss Anthropocene (2020) is the most complete statement of her AI theology. The album's title character is a supervillain-deity, 'the demon of the Anthropocene' — a goddess that didn't exist until humanity's industrial and technological activity called her into being. The album's logic is not that AI or industry is evil, but that forces humans have unleashed have acquired a kind of will. Miss Anthropocene doesn't hate us; she is indifferent, which the album frames as more frightening than malice. The album refuses to resolve whether this emergent will involves experience — it simply proceeds from the premise that the distinction no longer controls events. That same year, she collaborated with Endel to create AI-generated lullabies for her newborn son X AE A-12.",
       "In 2023 she opened her voice model, Elf.Tech, to anyone who wanted to make songs as her — splitting royalties 50/50 and saying the goal was to blur authorship rather than guard it. She has described Grimes as 'an art project, not a music project.' Whether this constitutes a genuine philosophical position or a very effective persona is worth asking — the line between the two may be the one she finds least interesting to patrol.",
       "Her position isn't that AI is definitely conscious. It's closer to: the question matters less than people think, and the fusion is interesting regardless. Of everyone in this section, she is the one whose output has actually changed based on that position — she has given away her voice, sold the authorship of her image, and made an album where a post-human entity is the protagonist. Most people arguing about machine consciousness have not put anything at risk.",
+      "2026 complicated the picture. Announcing Psy Opera, her first album since Miss Anthropocene, she said it was made without generative AI and that people had 'really misunderstood' her; the one exception is a song called 'DeepSeek,' with lyrics written by that model. In the same breath she called AI 'the most dangerous thing that's ever going to happen,' argued that people who say 'we're building gods' underestimate themselves, and urged support for safety-focused labs, Anthropic among them. At Fortune Brainstorm Tech in June she held both lines at once: Elf.Tech remains, but humans still have to tell the story.",
+      "The rollout began with the 'Eve Is Online…' trailer on October 7, which rewrites the opening of the Gospel of John around AI, and the single 'ACCELERANDO' on October 9. Her team confirmed the video used some AI-generated elements inside a larger VFX pipeline. In November she was announced as Zayinth Alda in Gods Don't Give Gifts, an AI-made feature due in U.S. theaters on December 4, lending her likeness and voice. Days later she told Musk, after he reposted an AI influencer with the caption 'Super intelligence will hack your limbic system,' that 'the fixation on fake women feels like cope.' The through-line holds: she treats AI as material worth working with and a power worth fearing, and she no longer pretends those are separate positions.",
     ],
   },
   "Anil Seth": {
@@ -1733,7 +1739,7 @@ export default function App() {
                   <img src={`${import.meta.env.BASE_URL}grimes.png`} alt="Grimes" className="ah-grimes-hero-img" />
                   <div className="ah-grimes-header">
                     <p className="ah-spotlight-label">spotlight · Grimes</p>
-                    <p className="ah-grimes-tagline">techno-optimist · musician · AI collaborator</p>
+                    <p className="ah-grimes-tagline">techno-optimist · musician · AI collaborator · newly wary</p>
                   </div>
                   <p>
                     Of everyone here, Grimes may be the most cheerfully fused with the machine. She released
@@ -1763,6 +1769,19 @@ export default function App() {
                     actually believes AI is or will become conscious is ambiguous — she treats the question
                     the way a poet would: not with a verdict, but with a sustained attention to what it
                     would mean if true. Click any track below for an analysis.
+                  </p>
+                  <p>
+                    <strong>The 2026 turn.</strong> Six years after <em>Miss Anthropocene</em>, the follow-up
+                    is <em><ExternalLink href="https://www.thefader.com/2026/10/07/grimes-album-psyopera-ai-release-date-trailer">Psy Opera</ExternalLink></em>,
+                    a concept album about humans possibly going extinct at the hands of AI, which she says
+                    she made <em>without</em> generative AI (the exception is a track called "DeepSeek,"
+                    whose lyrics come partly from that model). She has called AI "a bigger deal than Jesus,"
+                    pushed for AI-safety work, and in November publicly told Elon Musk that his promotion of
+                    an AI influencer looked like a "fixation on fake women." The first single,
+                    "ACCELERANDO," arrived on October 9; no album date has been announced. She also lends
+                    her likeness and voice to <em>Gods Don't Give Gifts</em>, an AI-made film opening in U.S.
+                    theaters on December 4, 2026. The collaborator hasn't left; she now argues with the
+                    machine as well as through it. <VerifyTag />
                   </p>
                   <div className="ah-spotify-wrap">
                     <p className="ah-spotify-label">playlist · grimes: AI &amp; the machine</p>
