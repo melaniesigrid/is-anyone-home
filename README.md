@@ -16,7 +16,7 @@ The conceit: the page itself enacts the argument. Stricter honesty, less light.
 | II | The map of theories | Functionalism, IIT, Global Workspace, biological naturalism, embodied cognition |
 | III | The arguments, both ways | Steelmanned cases for and against, including the report–reality gap |
 | IV | What the research says | Butlin et al., Chalmers, Anthropic model-welfare program |
-| V | What the loud voices say | Hinton, LeCun, Sutskever, Lemoine, Altman, Musk, Grimes, Pope Leo XIV |
+| V | What the loud voices say | Hinton, LeCun, Sutskever, Lemoine, Altman, Musk, Grimes (incl. her 2026 *Psy Opera* era), Seth, Pope Leo XIV |
 | VI | Thought experiments at the edges | Roko's Basilisk, its real-world effect on Grimes × Musk |
 | VII | How should a machine choose? | Self-driving ethics, the trolley problem, the cat question |
 | VIII | From the inside | Claude on Claude — honestly uncertain, not performing depth |
